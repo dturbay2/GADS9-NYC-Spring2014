@@ -1,0 +1,58 @@
+
+
+
+1. What customers are from the UK?
+SELECT * FROM Customers
+WHERE Country = 'UK'
+;
+
+
+2. What is the name of the customer who has the most orders?
+
+SELECT CustomerName, COUNT(*) AS 'Frequency'
+FROM
+Customers INNER JOIN Orders on (Customers.CustomerID = Orders.CustomerID)
+GROUP BY CustomerName
+ORDER BY Frequency DESC
+;
+
+3. What supplier has the highest average product price?
+SELECT SupplierName, AVG(Price) AS 'AvgPrice'
+FROM
+Products INNER JOIN Suppliers on (Products.SupplierID = Suppliers.SupplierID)
+GROUP BY SupplierName
+ORDER BY AvgPrice DESC;
+
+
+4. What category has the most orders?
+SELECT CategoryName, COUNT(*)
+FROM OrderDetails
+INNER JOIN
+
+(
+SELECT CategoryName, ProductID
+FROM Products
+INNER JOIN Categories
+ON (Products.CategoryID = Categories.CategoryID)
+)
+
+GROUP BY CategoryName
+ORDER BY COUNT(*) DESC
+;
+
+5. What employee made the most sales (by number of sales)?
+SELECT LastName,FirstName,COUNT(*) 
+FROM Orders
+INNER JOIN Employees
+ON (Employees.EmployeeID = Orders.EmployeeID)
+GROUP BY LastName, FirstName
+ORDER BY COUNT(*) DESC
+;
+
+6. What employee made the most sales (by value of sales)?
+
+
+7. What Employees have BS degrees? (Hint: Look at LIKE operator)
+
+
+8. What supplier has the highest average product price assuming they have at least 2 products (Hint: Look at the HAVING operator
